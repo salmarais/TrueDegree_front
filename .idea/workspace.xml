@@ -11,12 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e97f7dea-a79e-412b-b95c-34e671ff4c11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/assets/scss/paper-dashboard/_layout.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/variables/api.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/Verify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/scss/paper-dashboard.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/scss/paper-dashboard.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/variables/diplomas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/variables/diplomas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Diplomas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Diplomas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Search.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +91,7 @@
       <workItem from="1607946766543" duration="515000" />
       <workItem from="1610709308592" duration="852000" />
       <workItem from="1610819082594" duration="6324000" />
-      <workItem from="1610883616125" duration="13000000" />
+      <workItem from="1610883616125" duration="13198000" />
     </task>
     <servers />
   </component>
