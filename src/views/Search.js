@@ -1,6 +1,6 @@
 import React from "react";
 import {Col, Row, Card, CardBody, CardHeader, CardTitle, FormGroup, Input, Button} from "reactstrap";
-import SEARCH_DIPLOMAS from "../variables/api";
+import SEARCH_DIPLOMAS, { LIST_DIPLOMAS } from "../variables/api";
 import {columns, data} from "../variables/diplomas";
 
 class Search extends React.Component {
@@ -9,7 +9,8 @@ class Search extends React.Component {
         super(props);
         this.state = {
             name: '',
-            cin: null
+            cin: null,
+            diplomaIds: null
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -27,12 +28,12 @@ class Search extends React.Component {
 
     handleSubmit = data => {
         console.log(this.state);
-        /*fetch(SEARCH_DIPLOMAS)
+        fetch(LIST_DIPLOMAS + '/CIN=' + this.state.cin)
             .then(res => res.json())
             .then((data) => {
-                this.setState({ diplomas: data })
+                this.setState({ diplomaIds: data })
             })
-            .catch(console.log)*/
+            .catch(console.log)
         data.preventDefault();
     }
 
@@ -55,6 +56,7 @@ class Search extends React.Component {
                                                     defaultValue=""
                                                     placeholder="Name"
                                                     type="text"
+                                                    onChange = {this.handleInputChange}
                                                 />
                                             </FormGroup>
                                         </Col>
@@ -66,6 +68,7 @@ class Search extends React.Component {
                                                     defaultValue=""
                                                     placeholder="Cin"
                                                     type="text"
+                                                    onChange = {this.handleInputChange}
                                                 />
                                             </FormGroup>
                                         </Col>
@@ -77,6 +80,7 @@ class Search extends React.Component {
                                                     className="btn-primary"
                                                     color="primary"
                                                     type="submit"
+                                                    onSubmit = {this.handleSubmit}
                                                 >
                                                     Search
                                                 </Button>
