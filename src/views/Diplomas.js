@@ -16,18 +16,8 @@ import {columns, data} from "../variables/diplomas";
 import {FormGroup} from "@material-ui/core";
 
 // Variables
-import LIST_DIPLOMAS from "../variables/api";
-/*
-
-const columns = ["Name", "Company", "City", "State"];
-
-const data = [
-    ["Joe James", "Test Corp", "Yonkers", "NY"],
-    ["John Walsh", "Test Corp", "Hartford", "CT"],
-    ["Bob Herm", "Test Corp", "Tampa", "FL"],
-    ["James Houston", "Test Corp", "Dallas", "TX"],
-];
-*/
+import {ADD_DIPLOMAS} from "../variables/api";
+import Label from "reactstrap/lib/Label";
 
 const options = {
     filterType: 'checkbox',
@@ -43,12 +33,11 @@ class Diplomas extends React.Component {
         this.requests = data;
         this.state = {
             id: null,
-            university: data[1][4],
-            name: null,
+            fullName: null,
+            field: null,
             cin: null,
-            type: null,
-            date: null,
-
+            degreeType: null,
+            issuingDate: null,
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -66,6 +55,24 @@ class Diplomas extends React.Component {
 
     handleSubmit = data => {
         console.log(this.state);
+
+        const requestOptions = {
+            method: 'POST',
+            //With protected routes, we're sure that users that reach this view are authenticated
+            // and hence, auth token is saved in local storage
+            headers: { 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token') },
+            body: JSON.stringify(
+                { name: this.state.fullName,
+                    cin: this.state.cin,
+                    date: this.state.issuingDate,
+                    field: this.state.field,
+                    type: this.state.degreeType})
+        };
+        fetch(ADD_DIPLOMAS, requestOptions)
+            .then(res => res.json())
+            .then(data => this.setState({id: data.diplomaID}))
+            .catch(console.log);   
+
         data.preventDefault();
     }
 /*
@@ -77,12 +84,7 @@ class Diplomas extends React.Component {
             })
             .catch(console.log)
     }*/
-
-    render() {
-        return (
-            <>
-                <div className="content">
-                    <Row>
+/*
                         <Col lg="12" md="12" sm="12">
                             <Card>
                                 <CardHeader>
@@ -107,24 +109,65 @@ class Diplomas extends React.Component {
                                     />
                                 </CardBody>
                             </Card>
-                        </Col>
-                        <Col lg="6" md="12" sm="12">
-                            <Card>
-                                <CardHeader>
+                        </Col> 
+*/
+
+
+renderID(){
+    return (
+        <>
+                                    <CardHeader>
+                                    <CardTitle>
+                                        Diploma's Unique ID
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardBody>
+                  <Form>
+                                        <Row>
+                                        <div className="text-main">
+                                            <Label>
+                                                {this.state.id}
+                                            </Label>
+                                        </div>
+
+                                        </Row>
+                                        <Row>
+                                            <div className="update ml-auto mr-auto">
+                                                <Button
+                                                    className="btn-round"
+                                                    color="primary"
+                                                    type="submit"
+                                                >
+                                                    Back
+                                                </Button>
+                                            </div>
+                                        </Row>
+                                    </Form>
+                                </CardBody>
+
+        </>
+ 
+    );}
+
+renderForm(){
+    return (
+        <>
+                                    <CardHeader>
                                     <CardTitle>
                                         Add new diplomas
                                     </CardTitle>
                                 </CardHeader>
                                 <CardBody>
-                                    <Form onSubmit={this.handleSubmit}>
+                  <Form onSubmit={this.handleSubmit}>
                                         <Row>
                                             <Col className="pr-1" md="5">
                                                 <FormGroup>
-                                                    <label>University (disabled)</label>
+                                                    <label>Full Name</label>
                                                     <Input
+                                                        name="fullName"
+                                                        required
                                                         defaultValue={this.state.university}
-                                                        disabled
-                                                        placeholder="University Name"
+                                                        placeholder="John Ripper"
                                                         type="text"
                                                         onChange={this.handleInputChange}
                                                     />
@@ -134,8 +177,9 @@ class Diplomas extends React.Component {
                                                 <FormGroup>
                                                     <label>Date</label>
                                                     <Input
+                                                        name="issuingDate"
                                                         required
-                                                        placeholder="Date"
+                                                        placeholder="Issuing Date"
                                                         type="date"
                                                         onChange={this.handleInputChange}
                                                     />
@@ -144,10 +188,12 @@ class Diplomas extends React.Component {
                                             <Col className="pl-1" md="4">
                                                 <FormGroup>
                                                     <label htmlFor="Type">
-                                                        Degree Type
+                                                        CIN
                                                     </label>
                                                     <Input
-                                                        placeholder="Type"
+                                                        name="cin"
+                                                        required
+                                                        placeholder="12345678"
                                                         type="text"
                                                         onChange={this.handleInputChange}
                                                     />
@@ -157,9 +203,11 @@ class Diplomas extends React.Component {
                                         <Row>
                                             <Col className="pr-1" md="6">
                                                 <FormGroup>
-                                                    <label>First Name</label>
+                                                    <label>Field</label>
                                                     <Input
-                                                        placeholder="First Name"
+                                                        name="field"
+                                                        required
+                                                        placeholder="CS, SWE, etc."
                                                         type="text"
                                                         onChange={this.handleInputChange}
                                                     />
@@ -167,9 +215,11 @@ class Diplomas extends React.Component {
                                             </Col>
                                             <Col className="pl-1" md="6">
                                                 <FormGroup>
-                                                    <label>Last Name</label>
+                                                    <label>Degree Type</label>
                                                     <Input
-                                                        placeholder="Last Name"
+                                                        name="degreeType"
+                                                        required
+                                                        placeholder="Bachelor's, Master's, etc."
                                                         type="text"
                                                         onChange={this.handleInputChange}
                                                     />
@@ -188,8 +238,29 @@ class Diplomas extends React.Component {
                                                 </Button>
                                             </div>
                                         </Row>
+
                                     </Form>
                                 </CardBody>
+
+        </>
+    );
+}
+
+toggleRender(){
+    if(this.state.id)
+        return this.renderID();
+    else
+        return this.renderForm();
+}
+render() {
+        return (
+            <>
+                <div className="content">
+                    <Row>
+                        <Col lg="6" md="12" sm="12">
+                            <Card>
+                                {this.toggleRender()}
+                                
                             </Card>
                         </Col>
                     </Row>
