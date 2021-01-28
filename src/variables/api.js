@@ -1,4 +1,3 @@
 const HOST = 'http://localhost:27017'
-const LIST_DIPLOMAS = HOST + '/api/diplomas/list'
-const SEARCH_DIPLOMAS = HOST + '/api/diplomas/search'
-const VERIFY_DIPLOMAS = HOST + '/api/diplomas/verify'
+const LIST_DIPLOMAS = HOST + '/api/public/list'
+const VERIFY_DIPLOMAS = HOST + '/api/public/verify'
