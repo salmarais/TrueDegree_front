@@ -7,7 +7,8 @@ class Verify extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: null
+            id: null,
+            data: null
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -21,12 +22,12 @@ class Verify extends React.Component {
 
     handleSubmit = data => {
         console.log(this.state);
-        /*fetch(SEARCH_DIPLOMAS)
+        fetch(SEARCH_DIPLOMAS + '?diplomaID=' + this.state.id)
             .then(res => res.json())
             .then((data) => {
-                this.setState({ diplomas: data })
+                this.setState({ data: data })
             })
-            .catch(console.log)*/
+            .catch(console.log)
         data.preventDefault();
     }
 
