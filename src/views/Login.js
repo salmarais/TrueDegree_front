@@ -46,13 +46,15 @@ class Login extends React.Component {
         };
         fetch(LOGIN, requestOptions)
             .then(res => {
-                res.json();
-                console.log(res.headers)
+                console.log(res.headers.get('x-auth-token'));
+
+                //JSON parsing throws an error here, not critical
+                //res.json().then(data => console.log(data.headers));
             })
-            .then(data => {
+            /*.then(data => {
                 this.setState({ status: data.status, message: data.message })
                 
-            } )
+            } )*/
             .catch(console.log);        
 
         data.preventDefault();
