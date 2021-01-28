@@ -22,12 +22,14 @@ class Verify extends React.Component {
 
     handleSubmit = data => {
         console.log(this.state);
-        fetch(SEARCH_DIPLOMAS + '?diplomaID=' + this.state.id)
+        fetch(VERIFY_DIPLOMAS + '?diplomaID=' + this.state.id)
             .then(res => res.json())
             .then((data) => {
                 this.setState({ data: data })
+                console.log(data)
             })
             .catch(console.log)
+
         data.preventDefault();
     }
 
@@ -49,6 +51,8 @@ class Verify extends React.Component {
                                                     defaultValue=""
                                                     placeholder="Diploma ID"
                                                     type="text"
+                                                    onChange = {this.handleInputChange}
+
                                                 />
                                             </FormGroup>
                                         </Col>
@@ -60,6 +64,7 @@ class Verify extends React.Component {
                                                     className="btn-primary"
                                                     color="primary"
                                                     type="submit"
+                                                    onClick = {this.handleSubmit}
                                                 >
                                                     Search
                                                 </Button>
