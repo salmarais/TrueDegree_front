@@ -1,6 +1,6 @@
 import React from "react";
 import {Col, Row, Card, CardBody, CardHeader, CardTitle, FormGroup, Input, Button} from "reactstrap";
-import VERIFY_DIPLOMAS from "../variables/api";
+import {VERIFY_DIPLOMAS} from "../variables/api";
 
 class Verify extends React.Component {
 
