@@ -1,6 +1,6 @@
 import React from "react";
 import {Col, Row, Card, CardBody, CardHeader, CardTitle, FormGroup, Input, Button} from "reactstrap";
-import SEARCH_DIPLOMAS, { LIST_DIPLOMAS } from "../variables/api";
+import { LIST_DIPLOMAS } from "../variables/api";
 import {columns, data} from "../variables/diplomas";
 
 class Search extends React.Component {
@@ -8,7 +8,6 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
             cin: null,
             diplomaIds: null
         };
@@ -17,21 +16,30 @@ class Search extends React.Component {
     }
 
     handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-
+        console.log('hangle input')
         this.setState({
-            [name]: value
+            cin: event.target.value
         });
     }
 
+
+    // handleInputChange(event) {
+    //     const target = event.target;
+    //     const value = target.type === 'checkbox' ? target.checked : target.value;
+    //     const name = target.name;
+
+    //     this.setState({
+    //         [name]: value
+    //     });
+    // }
+
     handleSubmit = data => {
         console.log(this.state);
-        fetch(LIST_DIPLOMAS + '/CIN=' + this.state.cin)
+        fetch(LIST_DIPLOMAS + '?CIN=' + this.state.cin)
             .then(res => res.json())
             .then((data) => {
                 this.setState({ diplomaIds: data })
+                console.log(data)
             })
             .catch(console.log)
         data.preventDefault();
@@ -49,20 +57,8 @@ class Search extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <Row>
-                                        <Col md="6" sm="12">
+                                        <Col md="12" sm="12">
                                             <FormGroup>
-                                                <label>Student Name</label>
-                                                <Input
-                                                    defaultValue=""
-                                                    placeholder="Name"
-                                                    type="text"
-                                                    onChange = {this.handleInputChange}
-                                                />
-                                            </FormGroup>
-                                        </Col>
-                                        <Col md="6" sm="12">
-                                            <FormGroup>
-
                                                 <label>Cin</label>
                                                 <Input
                                                     defaultValue=""
@@ -80,7 +76,7 @@ class Search extends React.Component {
                                                     className="btn-primary"
                                                     color="primary"
                                                     type="submit"
-                                                    onSubmit = {this.handleSubmit}
+                                                    onClick = {this.handleSubmit}
                                                 >
                                                     Search
                                                 </Button>

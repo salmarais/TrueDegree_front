@@ -53,7 +53,6 @@ class Verify extends React.Component {
                                                     placeholder="Diploma ID"
                                                     type="text"
                                                     onChange = {this.handleInputChange}
-
                                                 />
                                             </FormGroup>
                                         </Col>
