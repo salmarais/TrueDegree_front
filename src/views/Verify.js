@@ -22,7 +22,8 @@ class Verify extends React.Component {
 
     handleSubmit = data => {
         console.log(this.state);
-        fetch(VERIFY_DIPLOMAS + '?diplomaID=' + this.state.id)
+        console.log(VERIFY_DIPLOMAS);
+        fetch('http://localhost:8000'+ '/api/public/verify' + '?diplomaID=' + this.state.id)
             .then(res => res.json())
             .then((data) => {
                 this.setState({ data: data })
