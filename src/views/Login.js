@@ -19,13 +19,12 @@ class Login extends React.Component {
     }
 
     setToken(userToken) {
-        sessionStorage.setItem('token', JSON.stringify(userToken));
+        localStorage.setItem('token', userToken);
       }
       
     getToken() {
-        const tokenString = sessionStorage.getItem('token');
-        const userToken = JSON.parse(tokenString);
-        return userToken?.token
+        const tokenString = localStorage.getItem('token');
+        return tokenString;
       }
 
     // handleInputChange(event) {
@@ -50,9 +49,6 @@ class Login extends React.Component {
     handleSubmit = data => {
         console.log(this.state);
 
-        this.setToken("blablablabla");
-        console.log("token", this.getToken());
-
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -60,11 +56,15 @@ class Login extends React.Component {
         };
         fetch(LOGIN, requestOptions)
             .then(res => {
-                console.log(res.headers.get('x-auth-token'));
-                this.setToken('res.headers.get("sdsdsd")');
+                const authToken = res.headers.get('x-auth-token');
+                this.setToken(authToken);
+                console.log(authToken);
+                
                 //JSON parsing throws an error here, not critical
                 //res.json().then(data => console.log(data.headers));
-                console.log("token", Token.getToken);
+
+                //Test for authToken 
+                console.log("token", this.getToken());
             })
             /*.then(data => {
                 this.setState({ status: data.status, message: data.message })
