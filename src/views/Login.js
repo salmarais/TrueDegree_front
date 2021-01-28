@@ -1,7 +1,7 @@
 import React from "react";
 import {Col, Row, Card, CardBody, CardHeader, CardTitle, FormGroup, Input, Button} from "reactstrap";
 import { LOGIN } from "variables/api";
-import { setToken } from "helpers/account"
+import Token from "helpers/Token"
 
 class Login extends React.Component {
 
@@ -17,6 +17,16 @@ class Login extends React.Component {
 
         this.handleInputChange = this.handleInputChange.bind(this);
     }
+
+    setToken(userToken) {
+        sessionStorage.setItem('token', JSON.stringify(userToken));
+      }
+      
+    getToken() {
+        const tokenString = sessionStorage.getItem('token');
+        const userToken = JSON.parse(tokenString);
+        return userToken?.token
+      }
 
     // handleInputChange(event) {
     //     console.log('hangle input')
@@ -40,6 +50,9 @@ class Login extends React.Component {
     handleSubmit = data => {
         console.log(this.state);
 
+        this.setToken("blablablabla");
+        console.log("token", this.getToken());
+
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -48,9 +61,10 @@ class Login extends React.Component {
         fetch(LOGIN, requestOptions)
             .then(res => {
                 console.log(res.headers.get('x-auth-token'));
-                setToken(res.headers.get('x-auth-token'));
+                this.setToken('res.headers.get("sdsdsd")');
                 //JSON parsing throws an error here, not critical
                 //res.json().then(data => console.log(data.headers));
+                console.log("token", Token.getToken);
             })
             /*.then(data => {
                 this.setState({ status: data.status, message: data.message })
