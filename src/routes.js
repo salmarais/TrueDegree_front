@@ -22,6 +22,7 @@ import Search from "./views/Search";
 import Diplomas from "./views/Diplomas";
 import Requests from "./views/Requests";
 import Verify from "./views/Verify";
+import Login from "./views/Login";
 
 var routes = [
   {
@@ -61,6 +62,12 @@ var routes = [
     name: "verify",
     icon: "nc-icon nc-caps-small",
     component: Verify,
+    layout: "/admin",
+  },{
+    path: "/login",
+    name: "login",
+    icon: "nc-icon nc-caps-small",
+    component: Login,
     layout: "/admin",
   }
 ];
