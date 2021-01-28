@@ -1,6 +1,7 @@
 import React from "react";
 import {Col, Row, Card, CardBody, CardHeader, CardTitle, FormGroup, Input, Button} from "reactstrap";
 import { LOGIN } from "variables/api";
+import { setToken } from "helpers/account"
 
 class Login extends React.Component {
 
@@ -47,7 +48,7 @@ class Login extends React.Component {
         fetch(LOGIN, requestOptions)
             .then(res => {
                 console.log(res.headers.get('x-auth-token'));
-
+                setToken(res.headers.get('x-auth-token'));
                 //JSON parsing throws an error here, not critical
                 //res.json().then(data => console.log(data.headers));
             })
