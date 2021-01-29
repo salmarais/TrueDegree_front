@@ -1,7 +1,8 @@
 import React from "react";
 import {Col, Row, Card, CardBody, CardHeader, CardTitle, FormGroup, Input, Button} from "reactstrap";
 import { LOGIN } from "variables/api";
-import Token from "helpers/Token"
+import { isLoggedIn } from "utils/utils";
+import { Redirect } from "react-router";
 
 class Login extends React.Component {
 
@@ -59,7 +60,8 @@ class Login extends React.Component {
                 const authToken = res.headers.get('x-auth-token');
                 this.setToken(authToken);
                 console.log(authToken);
-                
+                alert("Successfully logged in"); 
+
                 //JSON parsing throws an error here, not critical
                 //res.json().then(data => console.log(data.headers));
 
@@ -76,6 +78,10 @@ class Login extends React.Component {
     }
 
     render() {
+        let isLogin = isLoggedIn();
+        if(isLogin) {
+            return (<Redirect to="/admin/diplomas" />)
+        } else {
         return(
             <>
                 <div className="content">
@@ -120,7 +126,7 @@ class Login extends React.Component {
                                                     type="submit"
                                                     onClick = {this.handleSubmit}
                                                 >
-                                                    Search
+                                                    Login
                                                 </Button>
                                             </div>
                                         </Col>
@@ -132,6 +138,7 @@ class Login extends React.Component {
                 </div>
             </>
         );
+        }
     }
 }
 

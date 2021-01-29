@@ -2,6 +2,7 @@ import React from "react";
 import {Col, Row, Card, CardBody, CardHeader, CardTitle, FormGroup, Input, Button} from "reactstrap";
 import { LIST_DIPLOMAS } from "../variables/api";
 import {columns, data} from "../variables/diplomas";
+import { Link } from "react-router-dom";
 
 class Search extends React.Component {
 
@@ -34,7 +35,8 @@ class Search extends React.Component {
     // }
 
     handleSubmit = data => {
-        console.log(this.state);
+        
+        //this.state.diplomaIds = ["fsdffsdfsf"];
         fetch(LIST_DIPLOMAS + '?CIN=' + this.state.cin)
             .then(res => res.json())
             .then((data) => {
@@ -46,6 +48,13 @@ class Search extends React.Component {
     }
 
     render() {
+        const renderResults = ()=>{
+            if(this.state.diplomaIds) {
+                this.state.diplomaIds.map((listValues, index) => {
+                    return( <a>{listValues}</a> );
+                })
+            }
+          }
         return(
             <>
                 <div className="content">
@@ -59,7 +68,6 @@ class Search extends React.Component {
                                     <Row>
                                         <Col md="12" sm="12">
                                             <FormGroup>
-                                                <label>Cin</label>
                                                 <Input
                                                     defaultValue=""
                                                     placeholder="Cin"
@@ -81,10 +89,22 @@ class Search extends React.Component {
                                                     Search
                                                 </Button>
                                             </div>
+                                            <div>
+                                                <Link to="verify">Search by Diploma ID</Link>
+                                            </div>
                                         </Col>
                                     </Row>
+                                    <Row>
+                                        <Col>
+                                            <hr></hr> 
+                                            
+                                                
+                                        </Col>
+                                    </Row>
+                                    
                                 </CardBody>
                             </Card>
+                            
                         </Col>
                     </Row>
                 </div>

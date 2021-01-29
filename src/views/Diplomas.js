@@ -18,6 +18,8 @@ import {FormGroup} from "@material-ui/core";
 // Variables
 import {ADD_DIPLOMAS} from "../variables/api";
 import Label from "reactstrap/lib/Label";
+import { isLoggedIn } from "utils/utils";
+import { Redirect } from "react-router";
 
 const options = {
     filterType: 'checkbox',
@@ -253,20 +255,29 @@ toggleRender(){
         return this.renderForm();
 }
 render() {
-        return (
-            <>
-                <div className="content">
-                    <Row>
-                        <Col lg="6" md="12" sm="12">
-                            <Card>
-                                {this.toggleRender()}
-                                
-                            </Card>
-                        </Col>
-                    </Row>
-                </div>
-            </>
-        );
+    let isLogin = isLoggedIn();
+        if(isLogin) {
+            return (
+                <>
+                    <div className="content">
+                        <Row>
+                            <Col lg="6" md="12" sm="12">
+                                <Card>
+                                    {this.toggleRender()}
+                                    
+                                </Card>
+                            </Col>
+                        </Row>
+                    </div>
+                </>
+            );
+        } else {
+            return(
+                <Redirect to="/public/login" ></Redirect>
+            )
+        }
+
+        
     }
 }
 

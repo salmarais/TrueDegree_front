@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Paper Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import { Link } from "react-router-dom";
 import {
@@ -35,6 +17,7 @@ import {
   InputGroupAddon,
   Input,
 } from "reactstrap";
+import isLoggedIn from "utils/utils";
 
 import routes from "routes.js";
 
@@ -109,6 +92,7 @@ class Header extends React.Component {
     }
   }
   render() {
+    
     return (
       // add or remove classes depending if we are on full-screen-maps page or not
       <Navbar
@@ -163,8 +147,8 @@ class Header extends React.Component {
             </form>
             <Nav navbar>
               <NavItem>
-                <Link to="#pablo" className="nav-link btn-magnify">
-                  <i className="nc-icon nc-layout-11" />
+                <Link to="/public/login" className="nav-link btn-magnify">
+                  <i className="nc-icon nc-circle-10" />
                   <p>
                     <span className="d-lg-none d-md-block">Stats</span>
                   </p>
@@ -176,15 +160,15 @@ class Header extends React.Component {
                 toggle={(e) => this.dropdownToggle(e)}
               >
                 <DropdownToggle caret nav>
-                  <i className="nc-icon nc-bell-55" />
+                  <i className="nc-icon nc-simple-add" />
                   <p>
                     <span className="d-lg-none d-md-block">Some Actions</span>
                   </p>
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem tag="a">Action</DropdownItem>
-                  <DropdownItem tag="a">Another Action</DropdownItem>
-                  <DropdownItem tag="a">Something else here</DropdownItem>
+                  <DropdownItem tag="a">
+                    <Link to="/admin/diplomas">Add diplomas</Link>
+                  </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
               <NavItem>

@@ -18,57 +18,59 @@
 */
 import Dashboard from "views/Dashboard.js";
 import UserPage from "views/User.js";
-import Search from "./views/Search";
-import Diplomas from "./views/Diplomas";
-import Requests from "./views/Requests";
-import Verify from "./views/Verify";
-import Login from "./views/Login";
+import Search from "views/Search";
+import Diplomas from "views/Diplomas";
+import Requests from "views/Requests";
+import Verify from "views/Verify";
+import Login from "views/Login";
 
 var routes = [
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "nc-icon nc-bank",
-    component: Dashboard,
-    layout: "/admin",
-  },
-  {
-    path: "/user-page",
-    name: "User Profile",
-    icon: "nc-icon nc-single-02",
-    component: UserPage,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   icon: "nc-icon nc-bank",
+  //   component: Dashboard,
+  //   layout: "/admin",
+  // },
+  // {
+  //   path: "/user-page",
+  //   name: "User Profile",
+  //   icon: "nc-icon nc-single-02",
+  //   component: UserPage,
+  //   layout: "/admin",
+  // },
   {
     path: "/search",
     name: "Search",
     icon: "nc-icon nc-caps-small",
     component: Search,
-    layout: "/admin",
+    layout: "/public",
   },{
     path: "/diplomas",
     name: "Diplomas",
     icon: "nc-icon nc-caps-small",
     component: Diplomas,
     layout: "/admin",
-  },{
-    path: "/requests",
-    name: "Requests",
-    icon: "nc-icon nc-caps-small",
-    component: Requests,
-    layout: "/admin",
-  },{
+  },
+  // {
+  //   path: "/requests",
+  //   name: "Requests",
+  //   icon: "nc-icon nc-caps-small",
+  //   component: Requests,
+  //   layout: "/admin",
+  // },
+  {
     path: "/verify",
     name: "verify",
     icon: "nc-icon nc-caps-small",
     component: Verify,
-    layout: "/admin",
+    layout: "/public",
   },{
     path: "/login",
     name: "login",
     icon: "nc-icon nc-caps-small",
     component: Login,
-    layout: "/admin",
+    layout: "/public",
   }
 ];
 export default routes;

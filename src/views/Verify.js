@@ -1,6 +1,7 @@
 import React from "react";
 import {Col, Row, Card, CardBody, CardHeader, CardTitle, FormGroup, Input, Button} from "reactstrap";
 import {VERIFY_DIPLOMAS} from "../variables/api";
+import { Link } from "react-router-dom";
 
 class Verify extends React.Component {
 
@@ -68,6 +69,9 @@ class Verify extends React.Component {
                                                 >
                                                     Search
                                                 </Button>
+                                            </div>
+                                            <div>
+                                                <Link to="search">Search by Student CIN</Link>
                                             </div>
                                         </Col>
                                     </Row>
