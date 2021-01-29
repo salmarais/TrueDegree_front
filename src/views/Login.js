@@ -1,7 +1,7 @@
 import React from "react";
 import {Col, Row, Card, CardBody, CardHeader, CardTitle, FormGroup, Input, Button} from "reactstrap";
 import { LOGIN } from "variables/api";
-import { isLoggedIn } from "utils/utils";
+import { setToken, getToken, isLoggedIn } from "utils/utils";
 import { Redirect } from "react-router";
 
 class Login extends React.Component {
@@ -10,6 +10,7 @@ class Login extends React.Component {
         super(props);
         let isLogin;
         this.state = {
+            isLoggedIn: isLoggedIn(),
             status: null,
             message: null,
             token: null,
@@ -17,17 +18,11 @@ class Login extends React.Component {
             password: null
         };
 
+        //for testing
+        localStorage.removeItem('token');
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    setToken(userToken) {
-        localStorage.setItem('token', userToken);
-      }
-      
-    getToken() {
-        const tokenString = localStorage.getItem('token');
-        return tokenString;
-      }
 
     // handleInputChange(event) {
     //     console.log('hangle input')
@@ -59,15 +54,9 @@ class Login extends React.Component {
         fetch(LOGIN, requestOptions)
             .then(res => {
                 const authToken = res.headers.get('x-auth-token');
-                this.setToken(authToken);
-                console.log(authToken);
-                alert("Successfully logged in"); 
+                setToken(authToken);
+                this.setState({isLoggedIn: true});
 
-                //JSON parsing throws an error here, not critical
-                //res.json().then(data => console.log(data.headers));
-
-                //Test for authToken 
-                console.log("token", this.getToken());
             })
             /*.then(data => {
                 this.setState({ status: data.status, message: data.message })
@@ -79,14 +68,15 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        let isLogin = isLoggedIn();
+        //this.isLogin = isLoggedIn();
       }
       componentDidUpdate(e) {
         // Nothing for the moment
       }
 
     render() {
-            if(this.isLogin) {
+            if(this.state.isLoggedIn) {
+                console.log("reacheeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeed");
             return (<Redirect to="/admin/diplomas" />)
         } else {
         return(
