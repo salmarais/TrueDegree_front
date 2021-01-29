@@ -8,6 +8,7 @@ class Login extends React.Component {
 
     constructor(props) {
         super(props);
+        let isLogin;
         this.state = {
             status: null,
             message: null,
@@ -77,9 +78,23 @@ class Login extends React.Component {
         data.preventDefault();
     }
 
-    render() {
+    componentDidMount() {
         let isLogin = isLoggedIn();
-        if(isLogin) {
+        window.addEventListener("resize", this.updateColor.bind(this));
+      }
+      componentDidUpdate(e) {
+        if (
+          window.innerWidth < 993 &&
+          e.history.location.pathname !== e.location.pathname &&
+          document.documentElement.className.indexOf("nav-open") !== -1
+        ) {
+          document.documentElement.classList.toggle("nav-open");
+          this.sidebarToggle.current.classList.toggle("toggled");
+        }
+      }
+
+    render() {
+            if(this.isLogin) {
             return (<Redirect to="/admin/diplomas" />)
         } else {
         return(
