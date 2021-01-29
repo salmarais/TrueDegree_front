@@ -10,7 +10,7 @@ class Search extends React.Component {
         super(props);
         this.state = {
             cin: null,
-            diplomaIds: null
+            diplomaIds: []
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -40,8 +40,8 @@ class Search extends React.Component {
         fetch(LIST_DIPLOMAS + '?CIN=' + this.state.cin)
             .then(res => res.json())
             .then((data) => {
-                this.setState({ diplomaIds: data })
-                console.log(data)
+                this.setState({ diplomaIds: data.DiplomaIDs })
+                console.log(this.state.diplomaIds)
             })
             .catch(console.log)
         data.preventDefault();
@@ -50,8 +50,8 @@ class Search extends React.Component {
     render() {
         const renderResults = ()=>{
             if(this.state.diplomaIds) {
-                this.state.diplomaIds.map((listValues, index) => {
-                    return( <a>{listValues}</a> );
+                return this.state.diplomaIds.map( listValues => {
+                    return( <a>{listValues}<hr/></a> );
                 })
             }
           }
@@ -91,12 +91,16 @@ class Search extends React.Component {
                                             </div>
                                             <div>
                                                 <Link to="verify">Search by Diploma ID</Link>
+                                                <div>
+                                                    {renderResults()}
+                                                    
+                                                </div> 
                                             </div>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <hr></hr> 
+                                            
                                             
                                                 
                                         </Col>
