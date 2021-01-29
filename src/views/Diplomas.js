@@ -262,7 +262,7 @@ render() {
                     <div className="content">
                         <Row>
                             <Col lg="6" md="12" sm="12">
-                                <Card>
+                                <Card className="wrapping-center content-center align-content-md-center">
                                     {this.toggleRender()}
                                     
                                 </Card>

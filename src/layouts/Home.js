@@ -69,7 +69,7 @@ class Home extends React.Component {
                             );
                         })}
                     </Switch>
-                    <Footer fluid />
+                    
                 </div>
             </div>
         );

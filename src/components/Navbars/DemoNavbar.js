@@ -53,13 +53,13 @@ class Header extends React.Component {
     });
   }
   getBrand() {
-    let brandName = "Default Brand";
-    routes.map((prop, key) => {
-      if (window.location.href.indexOf(prop.layout + prop.path) !== -1) {
-        brandName = prop.name;
-      }
-      return null;
-    });
+    let brandName = "TrueDegree";
+    // routes.map((prop, key) => {
+    //   if (window.location.href.indexOf(prop.layout + prop.path) !== -1) {
+    //     brandName = prop.name;
+    //   }
+    //   return null;
+    // });
     return brandName;
   }
   openSidebar() {
@@ -135,23 +135,11 @@ class Header extends React.Component {
             navbar
             className="justify-content-end"
           >
-            <form>
-              <InputGroup className="no-border">
-                <Input placeholder="Search..." />
-                <InputGroupAddon addonType="append">
-                  <InputGroupText>
-                    <i className="nc-icon nc-zoom-split" />
-                  </InputGroupText>
-                </InputGroupAddon>
-              </InputGroup>
-            </form>
+            
             <Nav navbar>
               <NavItem>
                 <Link to="/public/login" className="nav-link btn-magnify">
                   <i className="nc-icon nc-circle-10" />
-                  <p>
-                    <span className="d-lg-none d-md-block">Stats</span>
-                  </p>
                 </Link>
               </NavItem>
               <Dropdown
